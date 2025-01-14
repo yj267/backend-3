@@ -1,7 +1,12 @@
 package com.github.backend1.repository;
 
+import com.github.backend1.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 
-public interface MemberRepository {
-    Optional<Object> findById(Long writerMemberId);
+@Repository
+public interface MemberRepository extends JpaRepository<User, Long> {
+    Optional<User> findById(Long writerMemberId);
 }

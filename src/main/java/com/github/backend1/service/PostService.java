@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Member;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,11 +31,8 @@ public class PostService {
         );
     }
 
-    public Arrays getAllPosts() {
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
     }
-
-
-    @Transactional(readOnly = true)
-
 
 }

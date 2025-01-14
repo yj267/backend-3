@@ -1,5 +1,12 @@
 package com.github.backend1.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.*;
+import org.aspectj.weaver.Member;
+import org.springframework.data.annotation.Id;
 import org.springframework.web.ErrorResponse;
 
 import java.time.LocalDateTime;
@@ -23,21 +30,4 @@ public class Post { //필요한 스키마 정보들을 저장한 Post 엔티티 
     private String body;
     private LocalDateTime createdAt;
 
-    public static ErrorResponse.Builder builder() {
-    }
-
-    public Long getId() {
-    }
-
-    public Post getWriter() {
-    }
-
-    public String getTitle() {
-    }
-
-    public String getBody() {
-    }
-
-    public LocalDateTime getCreatedAt() {
-    }
 }

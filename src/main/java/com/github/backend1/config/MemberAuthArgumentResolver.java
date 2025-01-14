@@ -3,12 +3,20 @@ package com.github.backend1.config;
 import com.github.backend1.dto.AuthInfo;
 import com.github.backend1.service.JwtService;
 import org.springframework.core.MethodParameter;
+import org.springframework.web.bind.support.WebDataBinderFactory;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.util.Map;
 
 public class MemberAuthArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final JwtService jwtService;
+
+    public MemberAuthArgumentResolver(JwtService jwtService) {
+        this.jwtService = jwtService;
+    }
+
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) { //어떤 대상에 바인딩할 것인지
