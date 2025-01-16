@@ -2,6 +2,7 @@ package com.github.backend1.service;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.stream.DoubleStream;
 
+@Service
 public class JwtService {
 
     @Value("supercoding")
