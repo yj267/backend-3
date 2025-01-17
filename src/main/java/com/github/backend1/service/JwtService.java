@@ -1,15 +1,22 @@
 package com.github.backend1.service;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.JWTVerifier;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Map;
-import java.util.stream.DoubleStream;
 
+@Slf4j
 @Service
 public class JwtService {
 
@@ -38,19 +45,12 @@ public class JwtService {
 
     public Map<String,Long> decode(String token){ //인코딩된 JWT를 디코딩하는 메소드 정의
         try{
-            DecodeJWT jwt = jwtVerifier.verify(token);
-            return Map.of(CLAIM_NAME_MEMBER_ID, jwt.getclaim(CLAIM_NAME_MEMBER_ID).asLong);
+            DecodedJWT jwt = jwtVerifier.verify(token);
+            return Map.of(CLAIM_NAME_MEMBER_ID, jwt.getClaim(CLAIM_NAME_MEMBER_ID).asLong());
         } catch(JWTVerificationException e){
             log.warn("Failed to decode jwt.token: {}",token, e);
             return null;
         }
     }
 
-    private static class JWT {
-        public static DoubleStream.Builder require(Algorithm algorithm) {
-        }
-
-        public static Object create() {
-        }
-    }
 }

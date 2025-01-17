@@ -4,6 +4,7 @@ import com.github.backend1.domain.User;
 import com.github.backend1.dto.SignUpRequest;
 import com.github.backend1.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +18,7 @@ public class MemberService {
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        MemberRepository.save(user);
+        memberRepository.save(user);
         return "회원가입이 완료되었습니다.";
     }
 }

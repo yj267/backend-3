@@ -1,10 +1,12 @@
 package com.github.backend1.service;
 
 import com.github.backend1.domain.Post;
+import com.github.backend1.domain.User;
 import com.github.backend1.repository.MemberRepository;
 import com.github.backend1.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Member;
 import java.time.LocalDateTime;
@@ -18,10 +20,11 @@ public class PostService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
 
-    public Post writePost(String title, String body, Long writerMemberId){
-        Member writer = memberRepository.findById(writerMemberId).orElseThrow(IllegalStateException);
-        //memberRepository에서 writeMemberID(JWT)로 Member 먼저 찾아오기
-        return postRepository.save( //Post 엔티티를 만들어서 저장
+    public Post writePost(String title, String body, Long writerMemberId) {
+        User writer = memberRepository.findById(writerMemberId)
+                .orElseThrow(() -> new IllegalStateException("Member not found for ID: " + writerMemberId));
+
+        return postRepository.save(
                 Post.builder()
                         .title(title)
                         .body(body)
@@ -34,5 +37,4 @@ public class PostService {
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
-
 }
